@@ -1,0 +1,304 @@
+/* --- VARIABLES GLOBALES DE ESTILO --- */
+:root {
+    --font-main: 'Arial', sans-serif;
+    --color-background: #1a1a1a;
+    --color-surface: #2d2d2d;
+    --color-primary: #c2410c;
+    --color-gold: #ffd700;
+    --color-text: #f0e6d2;
+    --color-dark-accent: #3a2d24;
+
+    /* Tamaños Responsivos */
+    --symbol-size: clamp(40px, 12vw, 100px); /* Tamaño de símbolo adaptable */
+    --reels-height: calc(var(--symbol-size) * 5);
+}
+
+/* --- ANIMACIONES (KEYFRAMES) --- */
+@keyframes pulse {
+    0% { transform: scale(1); background-color: rgba(255, 215, 0, 0.3); }
+    50% { transform: scale(1.15); background-color: rgba(255, 215, 0, 0.5); }
+    100% { transform: scale(1); background-color: rgba(255, 215, 0, 0.3); }
+}
+
+/* --- ESTILOS GENERALES --- */
+body {
+    margin: 0;
+    font-family: var(--font-main);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hidden {
+    display: none !important; /* !important para sobreescribir cualquier otro display */
+}
+
+/* --- CONTENEDOR PRINCIPAL DEL JUEGO --- */
+#game-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* --- CARRETES (REELS) --- */
+#reels-container {
+    display: flex;
+    border: 3px solid var(--color-surface);
+    background-color: #111;
+    width: 100%;
+    max-width: calc(var(--symbol-size) * 7 + 14px); /* 7 símbolos + bordes */
+    height: var(--reels-height);
+    position: relative; /* Para el overlay SVG */
+}
+
+.reel {
+    width: var(--symbol-size);
+    height: var(--reels-height);
+    border-right: 2px solid #444;
+    overflow: hidden;
+    position: relative;
+}
+
+.reel-symbols-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* La animación se controla por JS ahora */
+    transition: transform 2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.reel:last-child {
+    border-right: none;
+}
+
+.symbol {
+    width: var(--symbol-size);
+    height: var(--symbol-size);
+    box-sizing: border-box;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(var(--symbol-size) * 0.5);
+    transition: all 0.3s ease;
+}
+
+.symbol.winning {
+    border: 2px solid var(--color-gold);
+    border-radius: 10px;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.symbol-wild {
+    color: var(--color-gold);
+    font-weight: bold;
+    text-shadow: 0 0 5px var(--color-gold), 0 0 10px var(--color-primary);
+}
+
+/* --- PAYLINE OVERLAY --- */
+#payline-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.payline {
+    stroke: var(--color-gold);
+    stroke-width: 5px;
+    fill: none;
+    stroke-linecap: round;
+    opacity: 0.75;
+}
+
+/* --- PANTALLAS Y MENÚS EMERGENTES --- */
+.splash-screen, .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+}
+
+#info-menu {
+    /* Estilos para el menú de información */
+}
+
+.menu-content {
+    background: var(--color-dark-accent);
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid var(--color-text);
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.menu-content h2 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px; right: 15px;
+    background: none; border: none;
+    color: var(--color-text);
+    font-size: 2.5em;
+    cursor: pointer;
+}
+
+/* --- SECCIÓN DE INFORMACIÓN Y DESCRIPCIÓN --- */
+#info-display {
+    position: relative;
+    padding: 10px;
+    background-color: var(--color-surface);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+#info-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #555;
+    color: white;
+    border: 1px solid #888;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-description {
+    text-align: left;
+    width: 100%;
+}
+
+.game-description h3, .game-description h4 {
+    color: var(--color-gold);
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom: 5px;
+}
+
+.game-description ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.game-description li {
+    margin-bottom: 10px;
+}
+
+/* --- OPCIONES DE BONO --- */
+.bonus-option {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-primary);
+    border-radius: 8px;
+    padding: 20px;
+    flex-basis: 200px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* --- CONTROLES PRINCIPALES --- */
+#controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background-color: var(--color-surface);
+    border-radius: 10px;
+}
+
+#controls button, #controls select {
+    padding: 10px 15px;
+    font-size: 1.1em;
+    cursor: pointer;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#controls select {
+    background-color: #555;
+}
+
+/* --- MEDIA QUERIES PARA RESPONSIVIDAD --- */
+
+/* Tablets y pantallas pequeñas */
+@media (max-width: 992px) {
+    :root {
+        --symbol-size: clamp(40px, 10vw, 80px);
+    }
+    .menu-content {
+        max-width: 90%;
+    }
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+    :root {
+        --symbol-size: clamp(35px, 12.5vw, 50px);
+    }
+
+    #game-container {
+        padding: 5px;
+    }
+
+    #controls {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #controls > * {
+        width: 90%;
+        text-align: center;
+    }
+
+    .menu-content {
+        padding: 20px 10px;
+        gap: 10px;
+    }
+
+    .menu-content h2 {
+        font-size: 1.5em;
+    }
+
+    .bonus-option {
+        flex-basis: 100%; /* Ocupa todo el ancho */
+    }
+}

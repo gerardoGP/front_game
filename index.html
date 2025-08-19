@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF--8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silas the Sly</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="splash-screen">
+        <h1>Silas the Sly</h1>
+        <button id="play-button">Jugar</button>
+    </div>
+
+    <div id="game-container" class="hidden">
+        <div id="reels-container">
+            <svg id="payline-overlay"></svg>
+            </div>
+        <div id="info-display">
+            <p>Balance: <span id="balance-display">0</span></p>
+            <p>Giros Gratis: <span id="free-spins-display">0</span></p>
+            <p id="message-display"></p>
+            <button id="info-button">i</button>
+        </div>
+        <div id="controls">
+            <div id="bet-selector">
+                <span>Apuesta: $</span>
+                <select id="bet-amount">
+                </select>
+            </div>
+            <button id="spin-button">Girar</button>
+            <button id="buy-bonus-button">Comprar Bono</button>
+        </div>
+    </div>
+
+    <div id="info-menu" class="hidden modal-overlay">
+        <div class="menu-content">
+            <button class="close-button">&times;</button>
+            <h2>Información del Juego</h2>
+            <div class="game-description">
+                <h3>Silas the Sly</h3>
+                <p>¡Acompaña al bandido Silas en su búsqueda de botines legendarios!</p>
+                <h4>Símbolos de Pago</h4>
+                <ul>
+                    <li><b>7</b>: El más valioso.</li>
+                    <li><b>💎</b>: Diamante brillante.</li>
+                    <li><b>⭐</b>: Estrella de la suerte.</li>
+                    <li><b>🍉</b>: Sandía jugosa.</li>
+                    <li><b>🔔</b>: Campana dorada.</li>
+                    <li><b>🍊</b>: Naranja dulce.</li>
+                    <li><b>💰</b>: Saco de botín (multiplicador).</li>
+                    <li><b>🤠</b>: Silas (Scatter).</li>
+                </ul>
+                <div id="paytable-container"></div>
+                <h4>Giros Gratis</h4>
+                <p>Consigue 3 o más símbolos de <b>🤠</b> para activar la ronda de giros gratis.</p>
+                <h4>Compra de Bonos</h4>
+                <p>Usa el botón "Comprar Bono" para acceder a funciones especiales y aumentar tus ganancias.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="bonus-buy-menu" class="hidden modal-overlay">
+        <div class="menu-content">
+            <button class="close-button">&times;</button>
+            <h2>Comprar Característica</h2>
+    
+            <div class="bonus-option">
+                <h3>El Golpe del Sheriff</h3>
+                <p>Acceso directo a la ronda de bonificación con 10 Giros Gratis.</p>
+                <button class="buy-button" data-bonus-type="standard">
+                    Comprar por <span id="price-standard">$0.00</span>
+                </button>
+            </div>
+    
+            <div class="bonus-option">
+                <h3>El Botín Legendario</h3>
+                <p>¡La recompensa definitiva! 12 Giros Gratis con Sticky Wilds que revelan multiplicadores.</p>
+                <button class="buy-button" data-bonus-type="legendary">
+                    Comprar por <span id="price-legendary">$0.00</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bonus-summary-screen" class="hidden modal-overlay">
+        <div class="menu-content">
+            <h2>¡BONUS COMPLETADO!</h2>
+            <p class="summary-text">
+                Ganaste <span id="bonus-win-amount"></span> en <span id="bonus-spins-played"></span> giros.
+            </p>
+            <button id="close-summary-button">Continuar</button>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+    <script type="module" src="utils.js"></script>
+</body>
+</html>

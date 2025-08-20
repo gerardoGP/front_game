@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bonusSpinsPlayedSpan = document.getElementById('bonus-spins-played');
 
     // const API_URL = 'http://127.0.0.1:5000';
-    const API_URL = 'https://silla-game-backend-584c488ae4e2.herokuapp.com'
+    const API_URL = 'https://silla-game-backend-584c488ae4e2.herokuapp.com/'
     let currentBalance = 0;
     let currentFreeSpins = 0;
     let PAYLINES = [];
